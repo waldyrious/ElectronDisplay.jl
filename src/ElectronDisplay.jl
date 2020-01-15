@@ -23,12 +23,15 @@ end
 
 Update a copy of `config` based on `kwargs`.
 """
-setconfig(config::ElectronDisplayConfig;
+setconfig(
+    config::ElectronDisplayConfig;
     showable = config.showable,
     single_window::Bool = config.single_window,
     focus::Bool = config.focus,
-    max_json_bytes::Int = config.max_json_bytes,) =
-    ElectronDisplayConfig(showable = showable,
+    max_json_bytes::Int = config.max_json_bytes,
+) =
+    ElectronDisplayConfig(
+        showable = showable,
         single_window = single_window,
         focus = focus,
         max_json_bytes = max_json_bytes,
@@ -74,7 +77,8 @@ const _window = Ref{Window}()
 
 function _getglobalwindow()
     if !(isdefined(_window, 1) && _window[].exists)
-        _window[] = Electron.Window(URI("about:blank"),
+        _window[] = Electron.Window(
+            URI("about:blank"),
             options = Dict("webPreferences" => Dict("webSecurity" => false)))
     end
     return _window[]
@@ -84,7 +88,8 @@ const _plot_window = Ref{Window}()
 
 function _getglobalplotwindow()
     if !(isdefined(_plot_window, 1) && _plot_window[].exists)
-        _plot_window[] = Electron.Window(URI(react_html_url),
+        _plot_window[] = Electron.Window(
+            URI(react_html_url),
             options = Dict("webPreferences" => Dict("webSecurity" => false)))
     end
     return _plot_window[]
@@ -113,7 +118,8 @@ function displayhtml(d::ElectronDisplayType, payload; options::Dict = Dict{Strin
 end
 
 displayhtmlbody(d::ElectronDisplayType, payload) =
-    displayhtml(d, string("""
+    displayhtml(d, string(
+        """
         <!doctype html>
         <html>
 

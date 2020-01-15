@@ -67,8 +67,7 @@ include("construct_vega_specs.jl")
     @test displayable(eldt, "application/vnd.plotly.v1+json") == true
     @test displayable(eldt, "application/vnd.dataresource+json") == true
 
-    @testset "smoke test: single_window=$single_window focus=$focus " for
-        single_window in [false, true],
+    @testset "smoke test: single_window=$single_window focus=$focus " for single_window in [false, true],
         focus in [false, true]
         ElectronDisplay.CONFIG.single_window = single_window
         ElectronDisplay.CONFIG.focus = focus
